@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col s2 m4"></div>
+
+  <div class="col s8 m4">
+    <h1>Login</h1>
+
+    <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+      <div class="row">
+        <div class="input-field col s12">
+          <input type="text" id="email" name="email" placeholder="your@email.here" class="validate" (ngModel)="email" required>
+          <label for="email">Email</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input type="password" id="password" name="password" placeholder="Your secret password" class="validate" (ngModel)="password" required>
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6 offset-s3">
+          <button class="btn waves-effect waves-light" type="submit" [disabled]="!formData.valid">Submit
+            <i class="material-icons right">send</i>
+          </button>
+          <a [routerLink]="['/signup']">Sign Up</a>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="col s2 m4"></div>
+</div>
