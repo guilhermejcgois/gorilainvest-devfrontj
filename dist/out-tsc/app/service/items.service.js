@@ -14,20 +14,30 @@ var ItemsService = (function () {
         this.af = af;
     }
     ItemsService.prototype.add = function (item) {
+        console.log('###### add ######');
+        console.log(item);
         var uid = this.af.auth.getAuth().uid;
         var items = this.af.database.list('/users/' + uid);
         items.push(item);
     };
     ItemsService.prototype.list = function () {
+        console.log('###### list ######');
         var uid = this.af.auth.getAuth().uid;
         return this.af.database.list('/users/' + uid);
     };
     ItemsService.prototype.remove = function (item) {
+        console.log('###### remove ######');
+        console.log(item);
         var uid = this.af.auth.getAuth().uid;
         var items = this.af.database.list('/users/' + uid);
         items.remove(item)
             .then(function (_) { return console.log('success'); })
             .catch(function (err) { return console.log(err, 'You do not have access!'); });
+    };
+    ItemsService.prototype.update = function (item) {
+        var uid = this.af.auth.getAuth().uid;
+        var items = this.af.database.list('/users/' + uid);
+        items.update(item, { checked: !item.checked });
     };
     return ItemsService;
 }());

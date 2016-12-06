@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Http }      from '@angular/http';
 import { Router }    from '@angular/router';
+import {Location}    from '@angular/common';
 
 import { AngularFire } from 'angularfire2';
 
@@ -21,10 +22,11 @@ export class AddComponent  {
   private units: string[];
 
   constructor(
-    public router: Router
-    , public http: Http
-    , public   af: AngularFire
-    , public   is: ItemsService
+    public     router: Router
+    , public     http: Http
+    , public location: Location
+    , public       af: AngularFire
+    , public       is: ItemsService
     ) {
     this.item = new Item();
     this.clear();
@@ -45,5 +47,6 @@ export class AddComponent  {
     this.item.name = '';
     this.item.unit = '';
     this.item.quantity = 0;
+    this.item.checked = false;
   }
 }

@@ -10,13 +10,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { AngularFire } from 'angularfire2';
 import { Item } from '../model/item';
 import { ItemsService } from '../service/items.service';
 var AddComponent = (function () {
-    function AddComponent(router, http, af, is) {
+    function AddComponent(router, http, location, af, is) {
         this.router = router;
         this.http = http;
+        this.location = location;
         this.af = af;
         this.is = is;
         this.item = new Item();
@@ -34,6 +36,7 @@ var AddComponent = (function () {
         this.item.name = '';
         this.item.unit = '';
         this.item.quantity = 0;
+        this.item.checked = false;
     };
     return AddComponent;
 }());
@@ -44,6 +47,7 @@ AddComponent = __decorate([
     }),
     __metadata("design:paramtypes", [Router,
         Http,
+        Location,
         AngularFire,
         ItemsService])
 ], AddComponent);

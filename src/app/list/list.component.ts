@@ -8,7 +8,7 @@ import { ItemsService } from '../service/items.service';
 @Component({
   selector: 'list'
   , templateUrl: 'list.component.html'
-  //, template: `div`
+  , styleUrls: [ 'list.component.css' ]
 })
 
 export class ListComponent {
@@ -21,6 +21,10 @@ export class ListComponent {
 
   public delete(item: any) {
     this.is.remove(item);
+  }
+
+  public updateChecked(item: any) {
+    this.is.update(item);
   }
 
 }

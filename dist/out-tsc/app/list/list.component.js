@@ -17,12 +17,16 @@ var ListComponent = (function () {
     ListComponent.prototype.delete = function (item) {
         this.is.remove(item);
     };
+    ListComponent.prototype.updateChecked = function (item) {
+        this.is.update(item);
+    };
     return ListComponent;
 }());
 ListComponent = __decorate([
     Component({
         selector: 'list',
-        templateUrl: 'list.component.html'
+        templateUrl: 'list.component.html',
+        styleUrls: ['list.component.css']
     }),
     __metadata("design:paramtypes", [ItemsService])
 ], ListComponent);
