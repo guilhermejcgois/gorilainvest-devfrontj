@@ -12,7 +12,7 @@ import { User }        from '../model/user';
   , templateUrl: 'login.component.html'
   , styleUrls: [ 'login.component.css' ]
 })
-export class LoginComponent  {
+export class SignupComponent  {
   user = new User();
 
   constructor(

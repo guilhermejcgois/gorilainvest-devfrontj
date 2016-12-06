@@ -9,28 +9,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Injectable } from '@angular/core';
 import { AngularFire } from 'angularfire2';
-var AuthService = (function () {
-    function AuthService(af) {
+var ItemsService = (function () {
+    function ItemsService(af) {
         this.af = af;
-        this.authenticated = false;
-        this.authenticated = false;
     }
-    AuthService.prototype.login = function (userEmail, userPassword) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            _this.af.auth.login({ email: userEmail, password: userPassword })
-                .then(function (userData) { resolve(userData); _this.authenticated = true; }, function (err) { return reject(err); });
-        });
+    ItemsService.prototype.add = function (item) {
+        var uid = this.af.auth.getAuth().uid;
+        var items = this.af.database.list('/users/' + uid);
+        items.push(item);
     };
-    AuthService.prototype.logout = function () {
-        this.af.auth.logout();
-        this.authenticated = false;
+    ItemsService.prototype.list = function () {
+        var uid = this.af.auth.getAuth().uid;
+        return this.af.database.list('/users/' + uid);
     };
-    return AuthService;
+    ItemsService.prototype.remove = function (item) {
+        var uid = this.af.auth.getAuth().uid;
+        var items = this.af.database.list('/users/' + uid);
+        items.remove(item)
+            .then(function (_) { return console.log('success'); })
+            .catch(function (err) { return console.log(err, 'You do not have access!'); });
+    };
+    return ItemsService;
 }());
-AuthService = __decorate([
+ItemsService = __decorate([
     Injectable(),
     __metadata("design:paramtypes", [AngularFire])
-], AuthService);
-export { AuthService };
-//# sourceMappingURL=../../../../src/app/service/auth.service.js.map
+], ItemsService);
+export { ItemsService };
+//# sourceMappingURL=../../../../src/app/service/items.service.js.map

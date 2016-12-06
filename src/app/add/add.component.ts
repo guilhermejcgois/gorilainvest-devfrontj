@@ -4,7 +4,8 @@ import { Router }    from '@angular/router';
 
 import { AngularFire } from 'angularfire2';
 
-import { Item } from '../model/item';
+import { Item }         from '../model/item';
+import { ItemsService } from '../service/items.service';
 
 declare var $: any;
 
@@ -23,15 +24,11 @@ export class AddComponent  {
     public router: Router
     , public http: Http
     , public   af: AngularFire
+    , public   is: ItemsService
     ) {
     this.item = new Item();
-    this.item.name = '';
-    this.item.quantity = 0;
+    this.clear();
     this.units = [ "Packet(s)", "Dozen(s)", "Grams", "Mililiters", "Unit(s)", "Other" ]
-  }
-
-  public ngAfterViewChecked() {
-    $('select').material_select();
   }
 
   public ngOnDestroy() {
@@ -39,13 +36,14 @@ export class AddComponent  {
   }
 
   public add() {
-    let uid = this.af.auth.getAuth().uid;
-    console.log(uid);
-    console.log(this.item);
-    const items = this.af.database.list('/users/' + uid);
-    items.push(this.item);
+    this.is.add(this.item);
 
+    this.clear();
+  }
+
+  private clear() {
     this.item.name = '';
+    this.item.unit = '';
     this.item.quantity = 0;
   }
 }

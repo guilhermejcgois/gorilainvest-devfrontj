@@ -12,14 +12,14 @@ import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 import { User } from '../model/user';
-var LoginComponent = (function () {
-    function LoginComponent(router, http, auth) {
+var SignupComponent = (function () {
+    function SignupComponent(router, http, auth) {
         this.router = router;
         this.http = http;
         this.auth = auth;
         this.user = new User();
     }
-    LoginComponent.prototype.onSubmit = function (formData) {
+    SignupComponent.prototype.onSubmit = function (formData) {
         var _this = this;
         if (formData.valid) {
             this.auth.login(formData.value.email, formData.value.password)
@@ -27,9 +27,9 @@ var LoginComponent = (function () {
                 .catch(function (error) { _this.router.navigate(['/login']); });
         }
     };
-    return LoginComponent;
+    return SignupComponent;
 }());
-LoginComponent = __decorate([
+SignupComponent = __decorate([
     Component({
         selector: 'login',
         templateUrl: 'login.component.html',
@@ -38,6 +38,6 @@ LoginComponent = __decorate([
     __metadata("design:paramtypes", [Router,
         Http,
         AuthService])
-], LoginComponent);
-export { LoginComponent };
-//# sourceMappingURL=../../../../src/app/login/login.component.js.map
+], SignupComponent);
+export { SignupComponent };
+//# sourceMappingURL=../../../../src/app/signup/signup.component.js.map

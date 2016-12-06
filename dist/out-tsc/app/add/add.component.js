@@ -11,12 +11,30 @@ import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { AngularFire } from 'angularfire2';
+import { Item } from '../model/item';
+import { ItemsService } from '../service/items.service';
 var AddComponent = (function () {
-    function AddComponent(router, http, af) {
+    function AddComponent(router, http, af, is) {
         this.router = router;
         this.http = http;
         this.af = af;
+        this.is = is;
+        this.item = new Item();
+        this.clear();
+        this.units = ["Packet(s)", "Dozen(s)", "Grams", "Mililiters", "Unit(s)", "Other"];
     }
+    AddComponent.prototype.ngOnDestroy = function () {
+        $('select').material_select('destroy');
+    };
+    AddComponent.prototype.add = function () {
+        this.is.add(this.item);
+        this.clear();
+    };
+    AddComponent.prototype.clear = function () {
+        this.item.name = '';
+        this.item.unit = '';
+        this.item.quantity = 0;
+    };
     return AddComponent;
 }());
 AddComponent = __decorate([
@@ -26,7 +44,8 @@ AddComponent = __decorate([
     }),
     __metadata("design:paramtypes", [Router,
         Http,
-        AngularFire])
+        AngularFire,
+        ItemsService])
 ], AddComponent);
 export { AddComponent };
 //# sourceMappingURL=../../../../src/app/add/add.component.js.map

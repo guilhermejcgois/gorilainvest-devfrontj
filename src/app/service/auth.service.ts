@@ -7,7 +7,9 @@ export class AuthService {
 
   public authenticated = false;
 
-  constructor(public af: AngularFire) { }
+  constructor(public af: AngularFire) {
+    this.authenticated = false;
+  }
 
   public login(userEmail: string, userPassword: string): Promise<any> {
     return new Promise((resolve, reject) => {

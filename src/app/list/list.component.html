@@ -3,9 +3,9 @@
     <ul class="collection with-header">
       <li class="collection-header"><h4>What you need to buy:</h4></li>
       <li class="collection-item" *ngFor="let item of items | async">
-        <input type="checkbox" (id)="item.id" />
-	<label (for)="item.id">{{item.name}}<span class="badge">{{item.quantity}}-{{item.unit}}</span></label>
-        <i class="small material-icons">delete</i>
+        <input type="checkbox" (id)="item.id" (checked)="item.checked"/>
+        <label (for)="item.id">{{item.name}}<!--<span class="badge">{{item.quantity}}-{{item.unit}}</span>--></label>
+        <a [routerLink]="delete(item)"><i class="small material-icons right">delete</i></a>
       </li>
     </ul>
   </div>

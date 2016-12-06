@@ -17,7 +17,9 @@ import { AppRoutingModule } from './app-rounting.module';
 import { AddComponent } from './add/add.component';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
+import { ListComponent } from './list/list.component';
 import { AuthService } from './service/auth.service';
+import { ItemsService } from './service/items.service';
 export var firebaseConfig = {
     apiKey: "AIzaSyASD04cxkhrMi2tQaeoz-nrXJUjUb8vOdE",
     authDomain: "gorilainvest-devfrontj.firebaseapp.com",
@@ -39,6 +41,7 @@ AppModule = __decorate([
         declarations: [
             AppComponent,
             AddComponent,
+            ListComponent,
             LoginComponent
         ],
         imports: [
@@ -49,7 +52,10 @@ AppModule = __decorate([
             FormsModule,
             AppRoutingModule
         ],
-        providers: [AuthService],
+        providers: [
+            AuthService,
+            ItemsService
+        ],
         bootstrap: [AppComponent]
     }),
     __metadata("design:paramtypes", [])

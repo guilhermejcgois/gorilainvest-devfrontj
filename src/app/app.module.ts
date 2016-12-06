@@ -13,7 +13,8 @@ import { AppComponent }   from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ListComponent }  from './list/list.component';
 
-import { AuthService } from './service/auth.service';
+import { AuthService }  from './service/auth.service';
+import { ItemsService } from './service/items.service';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyASD04cxkhrMi2tQaeoz-nrXJUjUb8vOdE"
@@ -43,7 +44,10 @@ export const firebaseAuthConfig = {
     , FormsModule
     , AppRoutingModule
   ],
-  providers: [ AuthService ]
+  providers: [
+    AuthService
+    , ItemsService
+  ]
   , bootstrap: [AppComponent]
 })
 export class AppModule { }
