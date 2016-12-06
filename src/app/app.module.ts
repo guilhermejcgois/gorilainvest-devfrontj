@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-rounting.module';
 import { AddComponent }   from './add/add.component';
 import { AppComponent }   from './app.component';
 import { LoginComponent } from './login/login.component';
+import { ListComponent }  from './list/list.component';
 
 import { AuthService } from './service/auth.service';
 
@@ -31,6 +32,7 @@ export const firebaseAuthConfig = {
   declarations: [
     AppComponent
     , AddComponent
+    , ListComponent
     , LoginComponent
   ]
   , imports: [

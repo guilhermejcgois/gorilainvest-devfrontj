@@ -10,7 +10,7 @@ import { User }        from '../model/user';
 @Component({
   selector: 'login'
   , templateUrl: 'login.component.html'
-  ,
+  , styleUrls: [ 'login.component.css' ]
 })
 export class LoginComponent  {
   user = new User();
@@ -24,7 +24,7 @@ export class LoginComponent  {
   onSubmit(formData) {
     if (formData.valid) {
       this.auth.login(formData.value.email, formData.value.password)
-               .then((success) => { this.router.navigate(['/add']) })
+               .then((success) => { this.router.navigate(['/list']) })
                .catch((error) => { this.router.navigate(['/login'])} );
     }
   }
