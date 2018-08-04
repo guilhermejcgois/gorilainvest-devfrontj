@@ -5,10 +5,11 @@
   "angular-cli": {},
   "scripts": {
     "start": "ng serve",
-    "lint": "ng lint",
+    "lint": "ng lint --type-check",
     "test": "ng test",
+    "test-once": "ng test -sr",
     "pree2e": "webdriver-manager update",
-    "e2e": "protractor"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
