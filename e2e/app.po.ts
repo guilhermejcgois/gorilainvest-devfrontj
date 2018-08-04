@@ -6,6 +6,6 @@ export class Ng2ShoplistPage {
   }
 
   getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+    return element(by.css('app-root .footer-copyright .container')).getText();
   }
 }

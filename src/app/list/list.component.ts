@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFireList } from 'angularfire2/database';
 
-import { Item }         from '../model/item';
 import { ItemsService } from '../service/items.service';
 
 @Component({
@@ -12,7 +11,7 @@ import { ItemsService } from '../service/items.service';
 })
 
 export class ListComponent {
-  private items: FirebaseListObservable<any>;
+  private items: AngularFireList<any>;
 
   constructor(
     public   is: ItemsService ) {

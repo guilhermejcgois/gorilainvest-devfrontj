@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 import { AuthService } from './service/auth.service';
 
@@ -10,13 +10,12 @@ import { AuthService } from './service/auth.service';
 })
 
 export class AppComponent {
-  items: FirebaseListObservable<any[]>;
+  items: AngularFireList<any[]>;
   constructor(
-    public af: AngularFire
+    public db: AngularFireDatabase
     , public auth: AuthService
   ) {
-    this.items = af.database.list('/items');
-    console.log(af.auth.getAuth());
+    this.items = db.list<any>('/items');
   }
 
   logout() {

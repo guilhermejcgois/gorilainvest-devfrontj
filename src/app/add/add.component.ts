@@ -1,9 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Http }      from '@angular/http';
 import { Router }    from '@angular/router';
 import {Location}    from '@angular/common';
-
-import { AngularFire } from 'angularfire2';
 
 import { Item }         from '../model/item';
 import { ItemsService } from '../service/items.service';
@@ -16,7 +14,7 @@ declare var $: any;
   ,
 })
 
-export class AddComponent  {
+export class AddComponent implements OnDestroy  {
   private item: Item;
 
   private units: string[];
@@ -25,12 +23,11 @@ export class AddComponent  {
     public     router: Router
     , public     http: Http
     , public location: Location
-    , public       af: AngularFire
     , public       is: ItemsService
     ) {
     this.item = new Item();
     this.clear();
-    this.units = [ "Packet(s)", "Dozen(s)", "Grams", "Mililiters", "Unit(s)", "Other" ]
+    this.units = [ 'Packet(s)', 'Dozen(s)', 'Grams', 'Mililiters', 'Unit(s)', 'Other' ]
   }
 
   public ngOnDestroy() {

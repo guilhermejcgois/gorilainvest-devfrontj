@@ -1,35 +1,29 @@
 import { Injectable }  from '@angular/core';
-import { AngularFire } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 import { Item } from '../model/item';
 
 @Injectable()
 export class ItemsService {
+  private uid;
 
-  constructor(public af: AngularFire) {}
+  constructor(public db: AngularFireDatabase, public afAuth: AngularFireAuth) {
+    this.afAuth.authState.subscribe(user => this.uid = user.uid);
+  }
 
   public add(item: Item) {
-    console.log('###### add ######');
-    console.log(item);
-    let uid = this.af.auth.getAuth().uid;
-    const items = this.af.database.list('/users/' + uid);
+    const items = this.db.list('/users/' + this.uid);
 
     items.push(item);
   }
 
   public list() {
-    console.log('###### list ######');
-    let uid = this.af.auth.getAuth().uid;
-
-    return this.af.database.list('/users/' + uid);
+    return this.db.list('/users/' + this.uid);
   }
 
   public remove(item: any) {
-    console.log('###### remove ######');
-    console.log(item);
-
-    let uid = this.af.auth.getAuth().uid;
-    const items = this.af.database.list('/users/' + uid);
+    const items = this.db.list('/users/' + this.uid);
 
     items.remove(item)
          .then(_ => console.log('success'))
@@ -37,8 +31,7 @@ export class ItemsService {
   }
 
   public update(item: any) {
-    let uid = this.af.auth.getAuth().uid;
-    const items = this.af.database.list('/users/' + uid);
+    const items = this.db.list('/users/' + this.uid);
 
     items.update(item, { checked: !item.checked });
   }

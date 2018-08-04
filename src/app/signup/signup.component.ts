@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Http }      from '@angular/http';
 import { Router }    from '@angular/router';
 
-import { AngularFire } from 'angularfire2';
 
 import { AuthService } from '../service/auth.service';
 import { User }        from '../model/user';
