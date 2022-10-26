@@ -1,0 +1,14 @@
+<mat-toolbar color="primary">
+  <span>Ng-Shoplist</span>
+  <span class="spacer"></span>
+  <ng-container *ngIf="auth.loggedIn">
+    <button mat-icon-button aria-label="Log out from application" (click)="auth.logout()">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </ng-container>
+  <ng-container *ngIf="!auth.loggedIn && auth.waiting">
+    <button mat-icon-button aria-label="Doing logout...">
+      <mat-icon>pending</mat-icon>
+    </button>
+  </ng-container>
+</mat-toolbar>

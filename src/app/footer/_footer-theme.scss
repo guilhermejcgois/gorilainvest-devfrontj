@@ -1,0 +1,38 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@mixin color($theme) {
+  $color-config: mat.get-color-config($theme);
+  $background: map.get($color-config, background);
+  $foreground: map.get($color-config, foreground);
+
+  $primary-palette: map.get($color-config, 'primary');
+
+  .app-footer {
+    background: mat.get-color-from-palette($background, app-bar);
+    color: mat.get-color-from-palette($foreground, text);
+  }
+}
+
+@mixin typography($theme) {
+  $typography-config: mat.get-typography-config($theme);
+
+  .app-footer {
+    font-family: mat.font-family($typography-config);
+  }
+}
+
+@mixin theme($theme) {
+  @debug "footer theme";
+  $color-config: mat.get-color-config($theme);
+
+  @if $color-config !=null {
+    @include color($theme);
+  }
+
+  $typography-config: mat.get-typography-config($theme);
+
+  @if $typography-config !=null {
+    @include typography($theme);
+  }
+}
