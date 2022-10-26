@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private _loggedIn = true; // FIXME turns false when authentication is implemented
-  public get loggedIn() {
-    return this._loggedIn;
+  private _authenticated = false;
+  public get authenticated() {
+    return this._authenticated;
   }
-  private set loggedIn(isLoggedIn: boolean) {
-    this._loggedIn = isLoggedIn;
+  private set authenticated(isLoggedIn: boolean) {
+    this._authenticated = isLoggedIn;
   }
 
   private _waiting = false;
@@ -21,17 +21,47 @@ export class AuthService {
     this._waiting = waiting;
   }
 
+  private firstSignOutAttempt = false; // TODO remove when logout logic is implemented
+
   constructor(private _snackBar: MatSnackBar) { }
 
-  public logout() {
-    this.loggedIn = false;
+  public signIn() {
     this.waiting = true;
 
-    // TODO implement logou logic
+    // TODO implement sign in logic
 
     setTimeout(() => {
-      this.openSnack('Sorry, something goes wrong...', 'Okay :(');
-      this._loggedIn = true;
+      this.openSnack('Successfull signed in!!', { duration: 3000 });
+      this.authenticated = true;
+      this.waiting = false;
+    }, 3000);
+  }
+
+  public signUp() {
+    this.waiting = true;
+
+    // TODO implement sign in logic
+
+    setTimeout(() => {
+      this.openSnack('Successfull signed up!!', { duration: 3000 });
+      this.authenticated = true;
+      this.waiting = false;
+    }, 3000);
+  }
+
+  public signOut() {
+    this.waiting = true;
+    this.firstSignOutAttempt = !this.firstSignOutAttempt;
+
+    // TODO implement logout logic
+
+    setTimeout(() => {
+      if (this.firstSignOutAttempt) {
+        this.openSnack('Sorry, try again later...', { action: 'Okay :(' });
+      } else {
+        this.openSnack('Successfull logged out, see you later!', { duration: 2000 });
+        this.authenticated = false;
+      }
       this.waiting = false;
     }, 3000);
   }
@@ -42,7 +72,7 @@ export class AuthService {
    * @param message
    * @param action
    */
-  private openSnack(message: string, action: string) {
-    this._snackBar.open(message, action);
+  private openSnack(message: string, options: { action?: string } & MatSnackBarConfig) {
+    this._snackBar.open(message, options.action, options);
   }
 }

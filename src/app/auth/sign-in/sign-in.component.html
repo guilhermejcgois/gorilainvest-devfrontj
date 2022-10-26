@@ -1,0 +1,16 @@
+<mat-card>
+  <mat-card-title>Sign In</mat-card-title>
+  <mat-card-subtitle>Let's rock the day!</mat-card-subtitle>
+  <mat-card-content>
+    <p>signin works!</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button [routerLink]="['../sign-up']" routerLinkActive="router-link-active"  mat-flat-button>Create new account</button>
+    <button mat-raised-button color="primary" (click)="auth.signIn()">Sign In</button>
+  </mat-card-actions>
+  <mat-card-footer>
+    <ng-container *ngIf="auth.waiting">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </ng-container>
+  </mat-card-footer>
+</mat-card>
