@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+
 import { FooterComponent } from './footer.component';
 
 const EXPORTABLE_COMPS = [FooterComponent];
