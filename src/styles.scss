@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@use "@angular/material" as mat;
-@use "./styles/components";
+@use '@angular/material' as mat;
+@use './styles/components';
 
 @include mat.core();
 
@@ -19,7 +19,15 @@ $my-app-theme: mat.define-dark-theme((
 @include mat.all-component-themes($my-app-theme);
 @include components.theme($my-app-theme);
 
-@import url(./styles/reset.scss);
+@import url('./styles/reset.scss');
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, 'Helvetica Neue', sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}

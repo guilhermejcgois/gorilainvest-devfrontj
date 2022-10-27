@@ -1,13 +1,13 @@
 .app-root {
-  color: white; // FIXME
-
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 
+  color: #fff; // FIXME
+
   .router-container {
-    flex: 1;
     display: flex;
+    flex: 1;
     justify-content: center;
     padding-top: 20px;
   }
