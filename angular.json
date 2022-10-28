@@ -111,6 +111,16 @@
               "src/**/*.html"
             ]
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "ng-shoplist:build:production",
+            "firebaseProject": "gorilainvest-devfrontj",
+            "firebaseHostingSite": "ng-shoplist"
+          }
         }
       }
     }

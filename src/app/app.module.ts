@@ -10,6 +10,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FooterModule } from './footer/footer.module';
 import { HeaderModule } from './header/header.module';
+import { provideAnalytics,getAnalytics,ScreenTrackingService,UserTrackingService } from '@angular/fire/analytics';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 
 @NgModule({
   declarations: [
@@ -26,8 +29,13 @@ import { HeaderModule } from './header/header.module';
 
     HeaderModule,
     FooterModule,
+    provideAnalytics(() => getAnalytics()),
+    provideAuth(() => getAuth()),
+    provideRemoteConfig(() => getRemoteConfig()),
   ],
-  providers: [],
+  providers: [
+    ScreenTrackingService,UserTrackingService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

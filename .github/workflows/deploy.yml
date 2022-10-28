@@ -23,6 +23,13 @@ jobs:
       - name: Run Lint
         run: npm run lint && npm run lint:scss
 
-      - name: Deploy
+      - name: Build
+        run: npm run build:prod
+
+      - name: Deploy to Firebase
         if: success()
-        run: npm run deploy
+        uses: docker://w9jds/firebase-action:master
+        with:
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
