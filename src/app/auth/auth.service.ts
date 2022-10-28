@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
+import { FirebaseError } from '@angular/fire/app';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { from, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -23,18 +27,25 @@ export class AuthService {
 
   private firstSignOutAttempt = false; // TODO remove when logout logic is implemented
 
-  constructor(private _snackBar: MatSnackBar) { }
+  constructor(
+    private firebaseAuth: AngularFireAuth,
+    private snackBar: MatSnackBar
+  ) { }
 
-  public signIn() {
+  public signIn({ email, password }: { email: string, password: string }) {
     this.waiting = true;
 
-    // TODO implement sign in logic
-
-    setTimeout(() => {
-      this.openSnack('Successfull signed in!!', { duration: 3000 });
+    from(this.firebaseAuth.signInWithEmailAndPassword(email, password)).pipe(
+      catchError(error => of<FirebaseError>(error)),
+    ).subscribe(result => {
+      if ('name' in result && result.name === 'FirebaseError') {
+        this.catchFirebaseError(result);
+      } else {
+        this.openSnack('Successfull signed in!!', { duration: 7000 });
+      }
       this.authenticated = true;
       this.waiting = false;
-    }, 3000);
+    });
   }
 
   public signUp() {
@@ -53,17 +64,30 @@ export class AuthService {
     this.waiting = true;
     this.firstSignOutAttempt = !this.firstSignOutAttempt;
 
-    // TODO implement logout logic
-
-    setTimeout(() => {
-      if (this.firstSignOutAttempt) {
-        this.openSnack('Sorry, try again later...', { action: 'Okay :(' });
+    from(this.firebaseAuth.signOut()).pipe(
+      catchError(error => of<FirebaseError>(error)),
+    ).subscribe(result => {
+      if (typeof result !== 'undefined') {
+        this.catchFirebaseError(result);
       } else {
-        this.openSnack('Successfull logged out, see you later!', { duration: 2000 });
-        this.authenticated = false;
+        this.openSnack('Successfull signed out, see you later!', { duration: 7000 });
       }
+      this.authenticated = false;
       this.waiting = false;
-    }, 3000);
+    });
+  }
+
+  private catchFirebaseError(error: FirebaseError) {
+    let message = error.message;
+    switch (error.code) {
+      case 'auth/wrong-password':
+        message = 'Wrong password inserted.';
+        break;
+      case 'auth/user-not-found':
+        message = 'User not found.';
+        break;
+    }
+    this.openSnack(message, { duration: 7000 });
   }
 
   /**
@@ -73,6 +97,6 @@ export class AuthService {
    * @param action
    */
   private openSnack(message: string, options: { action?: string } & MatSnackBarConfig) {
-    this._snackBar.open(message, options.action, options);
+    this.snackBar.open(message, options.action, options);
   }
 }
