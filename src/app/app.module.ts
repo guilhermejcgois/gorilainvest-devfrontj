@@ -6,12 +6,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { PERSISTENCE, SETTINGS as AUTH_SETTINGS } from '@angular/fire/compat/auth';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { getRemoteConfig, provideRemoteConfig } from '@angular/fire/remote-config';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatInputModule } from '@angular/material/input';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -35,18 +30,13 @@ import { HeaderModule } from './header/header.module';
     provideDatabase(() => getDatabase()),
 
     MatSnackBarModule,
+    MatIconModule,
 
     HeaderModule,
     FooterModule,
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),
-    provideRemoteConfig(() => getRemoteConfig()),
-    MatInputModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatRadioModule,
-    MatCardModule,
-    ReactiveFormsModule,
+    provideRemoteConfig(() => getRemoteConfig())
   ],
   providers: [
     { provide: AUTH_SETTINGS, useValue: { appVerificationDisabledForTesting: true } },
