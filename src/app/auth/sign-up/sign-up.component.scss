@@ -1,0 +1,26 @@
+:host {
+  display: block;
+  min-width: 420px;
+  padding: 10px 20px 0;
+}
+
+.mat-card {
+  padding: 16px 24px;
+
+  &-actions {
+    margin-right: 0;
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.mat-icon {
+  cursor: pointer;
+}
+
+.mat-raised-button.mat-primary {
+  width: 81px;
+}

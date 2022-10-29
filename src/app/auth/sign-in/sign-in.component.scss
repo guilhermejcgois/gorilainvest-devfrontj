@@ -1,7 +1,7 @@
 :host {
   display: block;
+  min-width: 420px;
   padding: 10px 20px 0;
-  min-width: 320px;
 }
 
 .mat-card {
@@ -15,4 +15,8 @@
     display: flex;
     flex-direction: column;
   }
+}
+
+.mat-raised-button.mat-primary {
+  width: 81px;
 }

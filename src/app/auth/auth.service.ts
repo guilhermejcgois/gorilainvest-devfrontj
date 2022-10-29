@@ -48,16 +48,20 @@ export class AuthService {
     });
   }
 
-  public signUp() {
+  public signUp({ email, password }: { email: string, password: string }) {
     this.waiting = true;
 
-    // TODO implement sign in logic
-
-    setTimeout(() => {
-      this.openSnack('Successfull signed up!!', { duration: 3000 });
+    from(this.firebaseAuth.createUserWithEmailAndPassword(email, password)).pipe(
+      catchError(error => of<FirebaseError>(error)),
+    ).subscribe(result => {
+      if ('name' in result && result.name === 'FirebaseError') {
+        this.catchFirebaseError(result);
+      } else {
+        this.openSnack('Successfull signed up!!', { duration: 7000 });
+      }
       this.authenticated = true;
       this.waiting = false;
-    }, 3000);
+    });
   }
 
   public signOut() {
@@ -83,6 +87,11 @@ export class AuthService {
       case 'auth/wrong-password':
         message = 'Wrong password inserted.';
         break;
+
+      case 'auth/weak-password':
+        message = 'Choose a more strong password.';
+        break;
+
       case 'auth/user-not-found':
         message = 'User not found.';
         break;
