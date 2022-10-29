@@ -10,7 +10,7 @@ import { catchError, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  public user$ = this.firebaseAuth.user.pipe(tap(console.log));
+  public user$ = this.firebaseAuth.user.pipe(tap(user => this.authenticated = !!user));
 
   private _authenticated = false;
   public get authenticated() {
@@ -81,6 +81,7 @@ export class AuthService {
         this.catchFirebaseError(result);
       } else {
         this.openSnack('Successfull signed out, see you later!', { duration: 7000 });
+        this.router.navigate(['auth']);
       }
       this.authenticated = false;
       this.waiting = false;
