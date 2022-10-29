@@ -1,0 +1,15 @@
+<mat-card>
+  <mat-card-title>Shopping List</mat-card-title>
+  <mat-card-content>
+    <ng-container *ngIf="loading;else listTemplate">
+      <mat-spinner diameter="50"></mat-spinner>
+    </ng-container>
+    <ng-template #listTemplate>
+      <mat-list>
+        <mat-list-item *ngFor="let item of (shopListItems$|async); trackBy: trackByFn">
+          {{item.quantity}}{{item.unit}} {{item.name}}
+        </mat-list-item>
+      </mat-list>
+    </ng-template>
+  </mat-card-content>
+</mat-card>

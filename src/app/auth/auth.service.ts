@@ -2,13 +2,16 @@ import { Injectable } from '@angular/core';
 import { FirebaseError } from '@angular/fire/app';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { from, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  public user$ = this.firebaseAuth.user.pipe(tap(console.log));
+
   private _authenticated = false;
   public get authenticated() {
     return this._authenticated;
@@ -29,6 +32,7 @@ export class AuthService {
 
   constructor(
     private firebaseAuth: AngularFireAuth,
+    private router: Router,
     private snackBar: MatSnackBar
   ) { }
 
@@ -42,8 +46,9 @@ export class AuthService {
         this.catchFirebaseError(result);
       } else {
         this.openSnack('Successfull signed in!!', { duration: 7000 });
+        this.authenticated = true;
+        this.goToShopList();
       }
-      this.authenticated = true;
       this.waiting = false;
     });
   }
@@ -58,8 +63,9 @@ export class AuthService {
         this.catchFirebaseError(result);
       } else {
         this.openSnack('Successfull signed up!!', { duration: 7000 });
+        this.authenticated = true;
+        this.goToShopList();
       }
-      this.authenticated = true;
       this.waiting = false;
     });
   }
@@ -97,6 +103,10 @@ export class AuthService {
         break;
     }
     this.openSnack(message, { duration: 7000 });
+  }
+
+  private goToShopList() {
+    this.router.navigate(['shop-list']);
   }
 
   /**

@@ -3,8 +3,8 @@ import { getAnalytics, provideAnalytics, ScreenTrackingService, UserTrackingServ
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire/compat';
-import { SETTINGS as AUTH_SETTINGS } from '@angular/fire/compat/auth';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { PERSISTENCE, SETTINGS as AUTH_SETTINGS } from '@angular/fire/compat/auth';
+import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { getRemoteConfig, provideRemoteConfig } from '@angular/fire/remote-config';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -32,7 +32,7 @@ import { HeaderModule } from './header/header.module';
     BrowserAnimationsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     AngularFireModule.initializeApp(environment.firebase),
-    provideFirestore(() => getFirestore()),
+    provideDatabase(() => getDatabase()),
 
     MatSnackBarModule,
 
@@ -50,6 +50,7 @@ import { HeaderModule } from './header/header.module';
   ],
   providers: [
     { provide: AUTH_SETTINGS, useValue: { appVerificationDisabledForTesting: true } },
+    { provide: PERSISTENCE, useValue: 'session' },
     ScreenTrackingService,
     UserTrackingService
   ],
