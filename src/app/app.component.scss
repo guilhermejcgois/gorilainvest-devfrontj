@@ -1,6 +1,7 @@
 .app-root {
   display: flex;
   flex-direction: column;
+
   min-height: 100vh;
 
   color: #fff; // FIXME
@@ -9,6 +10,7 @@
     display: flex;
     flex: 1;
     justify-content: center;
+
     padding-top: 20px;
   }
 }

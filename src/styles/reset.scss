@@ -61,11 +61,11 @@ video {
   font: inherit;
   font-size: 100%;
   vertical-align: baseline;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  text-size-adjust: none;
 
   border: 0;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  text-size-adjust: none;
 }
 
 footer,

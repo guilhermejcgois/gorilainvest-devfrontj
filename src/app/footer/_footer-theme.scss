@@ -11,7 +11,7 @@
   .app-footer {
     color: mat.get-color-from-palette($foreground, text);
 
-    background: mat.get-color-from-palette($background, app-bar);
+    background-color: mat.get-color-from-palette($background, app-bar);
   }
 }
 
@@ -26,11 +26,11 @@
 @mixin theme($theme) {
   $color-config: mat.get-color-config($theme);
 
+  $typography-config: mat.get-typography-config($theme);
+
   @if $color-config !=null {
     @include color($theme);
   }
-
-  $typography-config: mat.get-typography-config($theme);
 
   @if $typography-config !=null {
     @include typography($theme);
