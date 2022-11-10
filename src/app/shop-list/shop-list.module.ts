@@ -7,6 +7,7 @@ import { ShopListService } from './shop-list.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AddShopItemModule } from '../add-shop-item/add-shop-item.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ShopListRoutingModule,
     MatCardModule,
     MatListModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    AddShopItemModule
   ],
   providers: [
     ShopListService

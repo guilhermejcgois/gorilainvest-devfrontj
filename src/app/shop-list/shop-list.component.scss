@@ -1,0 +1,8 @@
+:host {
+  display: grid;
+  grid-template-rows: minmax(min-content, max-content) 1fr;
+  gap: 20px;
+
+  width: 100%;
+  max-width: 420px;
+}

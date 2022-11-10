@@ -1,0 +1,11 @@
+<mat-card [@openClose]="cardState" (@openClose.start)="animationStart($event)"
+  (@openClose.done)="animationDone($event)">
+  <ng-container *ngIf="adding; else addButtonTemplate">
+    <button mat-button color="accent">SAVE ITEM</button>
+    <button mat-button (click)="cancel()">CANCEL</button>
+  </ng-container>
+</mat-card>
+
+<ng-template #addButtonTemplate>
+  <button mat-button (click)="showForm()">ADD</button>
+</ng-template>
