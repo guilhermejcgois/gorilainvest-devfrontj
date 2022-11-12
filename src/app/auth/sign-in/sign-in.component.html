@@ -15,7 +15,8 @@
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions align="end">
-      <button [routerLink]="['../sign-up']" routerLinkActive="router-link-active" mat-flat-button>Create new
+      <button mat-flat-button type="button" [routerLink]="['../sign-up']">Create
+        new
         account</button>
       <button mat-raised-button color="primary" type="submit" [disabled]="!signInForm.valid">Sign In</button>
     </mat-card-actions>

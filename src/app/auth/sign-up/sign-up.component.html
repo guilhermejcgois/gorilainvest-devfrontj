@@ -19,7 +19,7 @@
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions align="end">
-      <button [routerLink]="['../sign-in']" mat-flat-button>Already have an account?</button>
+      <button mat-flat-button type="button" [routerLink]="['../sign-in']">Already have an account?</button>
       <button mat-raised-button color="primary" type="submit" [disabled]="!signUpForm.valid">Sign Up</button>
     </mat-card-actions>
     <mat-card-footer>
