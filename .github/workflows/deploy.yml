@@ -1,13 +1,15 @@
+---
 name: Deploy
 
 on:
-  push:
-    branches:
-      - next
+  workflow_run:
+    workflows: [Lint Code Base]
+    types: [completed]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -20,9 +22,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run Lint
-        run: npm run lint && npm run lint:scss
-
       - name: Build
         run: npm run build:prod
 
@@ -33,3 +32,11 @@ jobs:
           args: deploy --only hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
+      - name: Slack on finish
+        if: always()
+        uses: act10ns/slack@v1
+        with:
+          webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
